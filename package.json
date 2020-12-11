@@ -15,6 +15,11 @@
     "hiker",
     "hiker-rule"
   ],
+  "files": [
+    "index.ts",
+    "dist/",
+    "lib/"
+  ],
   "author": "清白之年",
   "license": "MIT",
   "bugs": {
