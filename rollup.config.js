@@ -5,13 +5,14 @@ import tslint from 'rollup-plugin-tslint';
 import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
 import json from 'rollup-plugin-json';
+import nodePolyfills from 'rollup-plugin-node-polyfills'
 
 const banner = {
     banner() {
         return `/*! ${pkg.name} ${pkg.version} https://github.com/${pkg.repository.url} @license ${pkg.license} */`;
     }
 }
-const plugins = [typescript(), tslint(), nodeResolve(), commonjs(), json(), banner];
+const plugins = [typescript(), tslint(), commonjs(), json(), nodePolyfills(), nodeResolve(), banner];
 
 
 const umd_out_base = { format: 'umd', exports: 'named' };

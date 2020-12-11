@@ -2,8 +2,11 @@ import { HomeRuleItem, loadCdn } from "../utils/common";
 import { hiker_setError } from "hiker-nice/lib/utils/hiker";
 import { senlinjimoreRequest } from "../utils/request";
 
-export default function (): HomeRuleItem[] {
-  let res: any = senlinjimoreRequest("album/get_random_album_list", {});
+export default function (page: number, size: number = 30): HomeRuleItem[] {
+  let res: any = senlinjimoreRequest("album/get_album_list", {
+    page,
+    size,
+  });
   let data;
   try {
     data = res.data.data;
