@@ -11,16 +11,59 @@ export default function (): HomeRuleItem[] {
     hiker_setError(res);
     return [];
   }
+  let colorData = data.filter((d: { isColor?: boolean }) => {
+    return d.isColor;
+  });
+  let wallpaperData = data.filter((d: { isColor?: boolean }) => {
+    return !d.isColor;
+  });
   let items: HomeRuleItem[] = [];
-  data.forEach((element: any) => {
-    let col_type: string = "pic_2";
-    if (element.isColor) {
-      col_type = "icon_round_small_4";
-    }
+  items.push({
+    title: "比例分类",
+    col_type: "rich_text",
+  });
+  items = [
+    ...items,
+    {
+      title: "电脑",
+      img: "https://wallpaper.senlinjimore.com/images/pc.jpg",
+      col_type: "movie_3",
+      url: `hiker://empty?class=landscapeList&page=fypage@rule=js:${loadCdn}senlinjimore.loadPage(MY_URL);`,
+    },
+    {
+      title: "平板",
+      img: "https://wallpaper.senlinjimore.com/images/pad.jpg",
+      col_type: "movie_3",
+      url: `hiker://empty?class=padList&page=fypage@rule=js:${loadCdn}senlinjimore.loadPage(MY_URL);`,
+    },
+    {
+      title: "手机",
+      img: "https://wallpaper.senlinjimore.com/images/phone.jpg",
+      col_type: "movie_3",
+      url: `hiker://empty?class=wallpaperList&page=fypage@rule=js:${loadCdn}senlinjimore.loadPage(MY_URL);`,
+    },
+  ];
+  items.push({
+    title: "颜色分类",
+    col_type: "rich_text",
+  });
+  colorData.forEach((element: any) => {
     items.push({
       title: element.name,
       img: element.image,
-      col_type,
+      col_type: "icon_round_small_4",
+      url: `hiker://empty?class=classifyList&id=${element._id}&page=fypage@rule=js:${loadCdn}senlinjimore.loadPage(MY_URL);`,
+    });
+  });
+  items.push({
+    title: "壁纸分类",
+    col_type: "rich_text",
+  });
+  wallpaperData.forEach((element: any) => {
+    items.push({
+      title: element.name,
+      img: element.image,
+      col_type: "pic_2",
       url: `hiker://empty?class=classifyList&id=${element._id}&page=fypage@rule=js:${loadCdn}senlinjimore.loadPage(MY_URL);`,
     });
   });

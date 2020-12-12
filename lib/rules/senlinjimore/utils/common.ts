@@ -4,7 +4,7 @@ export function getTimestamp(): number {
   return Date.parse(new Date().toString());
 }
 
-export const loadCdn = `eval(fetch(getVar("cdn_senlinjimore","https://cdn.jsdelivr.net/npm/yongteng-hiker-rule@${version}/dist/senlinjimore/index.js")));`;
+export const loadCdn = `eval(fetch(getVar("cdn_senlinjimore","https://cdn.jsdelivr.net/npm/yongteng-hiker-rule@${version}/dist/senlinjimore/index.min.js")));`;
 
 export interface headers {
   "x-serverless-sign": string;
