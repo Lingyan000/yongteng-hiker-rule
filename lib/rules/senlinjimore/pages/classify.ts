@@ -19,7 +19,7 @@ export default function (): HomeRuleItem[] {
   });
   let items: HomeRuleItem[] = [];
   items.push({
-    title: "比例分类",
+    title: "<strong>比例分类</strong>",
     col_type: "rich_text",
   });
   items = [
@@ -44,10 +44,13 @@ export default function (): HomeRuleItem[] {
     },
   ];
   items.push({
-    title: "颜色分类",
+    title: "<strong>颜色分类</strong>",
     col_type: "rich_text",
   });
   colorData.forEach((element: any) => {
+    if (element.name === "白色")
+      element.image =
+        "https://cdn.jsdelivr.net/gh/Lingyan000/photos/img/20201212112909.png";
     items.push({
       title: element.name,
       img: element.image,
@@ -56,7 +59,7 @@ export default function (): HomeRuleItem[] {
     });
   });
   items.push({
-    title: "壁纸分类",
+    title: "<strong>壁纸分类</strong>",
     col_type: "rich_text",
   });
   wallpaperData.forEach((element: any) => {

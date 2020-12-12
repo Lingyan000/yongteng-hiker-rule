@@ -11,6 +11,7 @@ import selectedList from "./selectedList";
 import landscapeList from "./landscapeList";
 import padList from "./padList";
 import wallpaperList from "./wallpaperList";
+import { recommend } from "..";
 
 export function loadPage(url: string): void {
   let arg = parse(url).query;
@@ -74,6 +75,14 @@ export function loadPage(url: string): void {
     case "wallpaperList":
       items = wallpaperList(parseInt(params.page) - 1);
       if (items.length <= 0) {
+        items.push(pageEnd);
+      }
+      break;
+    // 精彩推荐
+    case "recommend":
+      if (parseInt(params.page) == 1) {
+        items = recommend();
+      } else {
         items.push(pageEnd);
       }
       break;
