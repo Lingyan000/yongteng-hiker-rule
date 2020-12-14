@@ -2,7 +2,7 @@ import { hiker_fetch } from "hiker-nice/lib/utils/hiker";
 import { HomeRuleItem } from "../utils/common";
 
 const statement = `
-<h2 style="text-align:center">免责声明：</h2>
+<h2 style="text-align:center">免责声明</h2>
 <font color="red">本规则仅供学习交流，请于24小时内删除。</font><br/>
 规则接口来源于「森图」微信小程序。<br/>
 若是你喜欢「森图」，请前往微信小程序获得更好的使用体验。<br/>
