@@ -14,6 +14,7 @@ CDN
 |         名称         |                           cdn 地址                           |
 | :------------------: | :----------------------------------------------------------: |
 | 森图（senlinjimore） | https://cdn.jsdelivr.net/npm/yongteng-hiker-rule/dist/senlinjimore/index.js |
+| 夸克壁纸（QuarkPic） | https://cdn.jsdelivr.net/npm/yongteng-hiker-rule/dist/QuarkPic/index.js |
 
 
 File
@@ -22,11 +23,19 @@ File
 海阔视界，森图本地文件￥file_url￥hiker://files/senlinjimore/index.js@https://cdn.jsdelivr.net/npm/yongteng-hiker-rule/dist/senlinjimore/index.min.js
 ```
 
+```
+海阔视界，夸克壁纸本地文件￥file_url￥hiker://files/QuarkPic/index.js@https://cdn.jsdelivr.net/npm/yongteng-hiker-rule/dist/QuarkPic/index.min.js
+```
+
 
 Plug-in
 -------
 ```
 海阔视界，森图网页插件￥js_url￥senlinjimore@https://cdn.jsdelivr.net/npm/yongteng-hiker-rule/dist/senlinjimore/index.min.js
+```
+
+```
+海阔视界，夸克壁纸网页插件￥js_url￥QuarkPic@https://cdn.jsdelivr.net/npm/yongteng-hiker-rule/dist/QuarkPic/index.min.js
 ```
 
 License

@@ -30,4 +30,17 @@ export default [{
         plugins: [terser()]
     }],
     plugins: plugins
+}, {
+    input: './lib/rules/QuarkPic/index.ts',
+    output: [{
+        ...umd_out_base,
+        name: "QuarkPic",
+        file: 'dist/QuarkPic/index.js',
+    }, {
+        ...umd_out_base,
+        name: "QuarkPic",
+        file: 'dist/QuarkPic/index.min.js',
+        plugins: [terser()]
+    }],
+    plugins: plugins
 }];

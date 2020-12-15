@@ -1,4 +1,4 @@
-import { HomeRuleItem } from "../utils/common";
+import { HomeRuleItem } from "../../../utils/common";
 import { hiker_setError } from "hiker-nice/lib/utils/hiker";
 import { parse } from "url";
 import * as querystring from "querystring";

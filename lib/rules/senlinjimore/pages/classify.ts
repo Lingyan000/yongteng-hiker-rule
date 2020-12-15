@@ -1,6 +1,7 @@
-import { HomeRuleItem, loadCdn } from "../utils/common";
+import { loadCdn } from "../utils/common";
 import { hiker_setError } from "hiker-nice/lib/utils/hiker";
 import { senlinjimoreRequest } from "../utils/request";
+import { HomeRuleItem } from "../../../utils/common";
 
 export default function (): HomeRuleItem[] {
   let res: any = senlinjimoreRequest("wallpaper/get_classify_list", {});
