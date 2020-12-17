@@ -1,6 +1,6 @@
 {
   "name": "yongteng-hiker-rule",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "yongteng 的海阔视界规则调用库",
   "main": "index.ts",
   "scripts": {
@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/Lingyan000/yongteng-hiker-rule#readme",
   "dependencies": {
-    "hiker-nice": "^1.0.4",
+    "@types/crypto-js": "^4.0.1",
+    "hiker-nice": "^1.0.5",
     "rollup-plugin-node-polyfills": "^0.2.1"
   },
   "devDependencies": {
