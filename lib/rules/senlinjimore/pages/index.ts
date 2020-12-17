@@ -1,7 +1,10 @@
 import { parse } from "url";
 import * as querystring from "querystring";
-import { hiker_setHomeResult } from "hiker-nice/lib/utils/hiker";
-import { HomeRuleItem, pageEnd } from "../../../utils/common";
+import {
+  hiker_setError,
+  hiker_setHomeResult,
+} from "hiker-nice/lib/utils/hiker";
+import { getQuery, HomeRuleItem, pageEnd } from "../../../utils/common";
 import album from "./album";
 import classify from "./classify";
 import classifyList from "./classifyList";
