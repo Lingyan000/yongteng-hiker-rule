@@ -65,4 +65,17 @@ export default [{
         plugins: [terser()]
     }],
     plugins: coolPicPlugins
+}, {
+    input: './lib/rules/KinhDownload/index.ts',
+    output: [{
+        ...umd_out_base,
+        name: "KinhDownload",
+        file: 'dist/KinhDownload/index.js',
+    }, {
+        ...umd_out_base,
+        name: "KinhDownload",
+        file: 'dist/KinhDownload/index.min.js',
+        plugins: [terser()]
+    }],
+    plugins: plugins
 }];

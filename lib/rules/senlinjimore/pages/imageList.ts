@@ -6,8 +6,8 @@ import { senlinjimoreRequest } from "../utils/request";
 
 export default function (url: string): HomeRuleItem[] {
   let arg = parse(url).query;
-  let params: { id?: string; [propName: string]: any } = querystring.parse(arg);
-  let albumId: string = params.id;
+  let params: { id?: string; [propName: string]: any } = querystring.parse(arg!);
+  let albumId: string = params.id!;
   let res: any = senlinjimoreRequest("album/get_album_image_list", {
     albumId,
   });

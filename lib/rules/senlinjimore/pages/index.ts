@@ -24,20 +24,20 @@ export function loadPage(url: string): void {
     page?: string;
     id?: string;
     [propName: string]: any;
-  } = querystring.parse(arg);
+  } = querystring.parse(arg!);
   let items: HomeRuleItem[] = [];
   if (isAgree()) {
     switch (params.class) {
       // 专辑
       case "album":
-        items = album(parseInt(params.page) - 1);
+        items = album(parseInt(params.page!) - 1);
         if (items.length <= 0) {
           items.push(pageEnd);
         }
         break;
       // 分类
       case "classify":
-        if (parseInt(params.page) == 1) {
+        if (parseInt(params.page!) == 1) {
           items = classify();
         } else {
           items.push(pageEnd);
@@ -45,56 +45,56 @@ export function loadPage(url: string): void {
         break;
       // 分类详情
       case "classifyList":
-        items = classifyList(params.id, parseInt(params.page) - 1);
+        items = classifyList(params.id!, parseInt(params.page!) - 1);
         if (items.length <= 0) {
           items.push(pageEnd);
         }
         break;
       // 今日热门
       case "lastDownList":
-        items = lastDownList(parseInt(params.page) - 1);
+        items = lastDownList(parseInt(params.page!) - 1);
         if (items.length <= 0) {
           items.push(pageEnd);
         }
         break;
       // 最受欢迎
       case "hotList":
-        items = hotList(parseInt(params.page) - 1);
+        items = hotList(parseInt(params.page!) - 1);
         if (items.length <= 0) {
           items.push(pageEnd);
         }
         break;
       // 精选
       case "selectedList":
-        items = selectedList(parseInt(params.page) - 1);
+        items = selectedList(parseInt(params.page!) - 1);
         if (items.length <= 0) {
           items.push(pageEnd);
         }
         break;
       // 电脑
       case "landscapeList":
-        items = landscapeList(parseInt(params.page) - 1);
+        items = landscapeList(parseInt(params.page!) - 1);
         if (items.length <= 0) {
           items.push(pageEnd);
         }
         break;
       // 平板
       case "padList":
-        items = padList(parseInt(params.page) - 1);
+        items = padList(parseInt(params.page!) - 1);
         if (items.length <= 0) {
           items.push(pageEnd);
         }
         break;
       // 手机
       case "wallpaperList":
-        items = wallpaperList(parseInt(params.page) - 1);
+        items = wallpaperList(parseInt(params.page!) - 1);
         if (items.length <= 0) {
           items.push(pageEnd);
         }
         break;
       // 精彩推荐
       case "recommend":
-        if (parseInt(params.page) == 1) {
+        if (parseInt(params.page!) == 1) {
           items = recommend();
         } else {
           items.push(pageEnd);

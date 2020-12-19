@@ -13,19 +13,19 @@ export function loadPage(url: string): void {
     page?: string;
     id?: string;
     [propName: string]: any;
-  } = querystring.parse(arg);
+  } = querystring.parse(arg!);
   let items: HomeRuleItem[] = [];
-  items = dynamicList(params.class, parseInt(params.page));
+  items = dynamicList(params.class!, parseInt(params.page!));
   if (items.length <= 0) {
     items.push(pageEnd);
   }
   if (isAgree())
     switch (params.class) {
       case "picArr":
-        items = picArrList(params.id);
+        items = picArrList(params.id!);
         break;
       default:
-        items = dynamicList(params.class, parseInt(params.page));
+        items = dynamicList(params.class!, parseInt(params.page!));
         if (items.length <= 0) {
           items.push(pageEnd);
         }

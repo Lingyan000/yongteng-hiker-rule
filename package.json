@@ -28,7 +28,9 @@
   "homepage": "https://github.com/Lingyan000/yongteng-hiker-rule#readme",
   "dependencies": {
     "@types/crypto-js": "^4.0.1",
-    "hiker-nice": "^1.0.5",
+    "@types/qs": "^6.9.5",
+    "hiker-nice": "^1.0.6",
+    "qs": "^6.9.4",
     "rollup-plugin-node-polyfills": "^0.2.1"
   },
   "devDependencies": {
