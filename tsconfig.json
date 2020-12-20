@@ -62,7 +62,8 @@
         // ],
         "resolveJsonModule": true,
     },
-    "include": [
-        "lib"
+    "exclude": [
+        "dist",
+        "node_modules",
     ]
 }

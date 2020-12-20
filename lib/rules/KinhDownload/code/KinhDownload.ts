@@ -1,5 +1,9 @@
 import { $http } from "hiker-nice";
 import qs from "qs";
+import { HomeRuleItem } from "../../../utils/common";
+import { loadCdn } from "../utils/common";
+declare function parseDomForHtml(html: string, choose: string): string;
+declare function parseDomForArray(html: string, choose: string): string[];
 
 export class KinhDownload {
   private surl: string = "";
@@ -37,7 +41,7 @@ export class KinhDownload {
     } else this.surl = "1" + surl[1];
     return true;
   }
-  OpenDir(
+  openDir(
     path: string,
     pwd: string,
     share_id: string,
@@ -47,14 +51,153 @@ export class KinhDownload {
   ) {
     return $http.post(
       "https://pan.kdbaidu.com/",
-      qs.stringify({
-        dir: path,
-        pwd,
-        surl,
-        share_id,
-        uk,
-        randsk,
-      })
+      qs.stringify(
+        {
+          dir: path,
+          pwd,
+          surl,
+          share_id,
+          uk,
+          randsk: decodeURI(randsk),
+        },
+        { encode: false }
+      )
     );
+  }
+  dl(
+    fs_id: string,
+    timestamp: string,
+    sign: string,
+    randsk: string,
+    share_id: string,
+    uk: string,
+    share: string,
+    pwd: string
+  ) {
+    try {
+      let res = $http.post(
+        "https://pan.kdbaidu.com/?download",
+        qs.stringify(
+          {
+            fs_id,
+            timestamp,
+            sign,
+            randsk: decodeURI(randsk),
+            share_id,
+            uk,
+            share,
+            pwd,
+          },
+          {
+            encode: true,
+          }
+        ),
+        { redirect: false }
+      );
+      if (res.status === 200) {
+        return res;
+      } else {
+        return $http.get(res.headers.location[0]);
+      }
+    } catch (e) {
+      if (e.message == "Request failed with status code -1")
+        throw new Error("请求超时，可尝试重新获取");
+    }
+  }
+  parsingList(data: string): HomeRuleItem[] {
+    let list: string[] = parseDomForArray(data, ".list-group&&li");
+    return list.map((li) => {
+      let name = parseDomForHtml(li, "a&&Text");
+      let size = parseDomForHtml(li, ".float-right&&Text");
+      let title = `${name}${size && " --" + size}`;
+      if (parseDomForArray(li, ".fa-folder").length > 0)
+        return {
+          title,
+          col_type: "avatar",
+          img:
+            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220105956.png",
+          url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
+            li,
+            "a&&href"
+          ).replace("javascript:", "KinhDownload.")};`,
+        };
+      else if (
+        [
+          "wmv",
+          "rmvb",
+          "mpeg4",
+          "mpeg2",
+          "flv",
+          "avi",
+          "3gp",
+          "mpga",
+          "qt",
+          "rm",
+          "wmz",
+          "wmd",
+          "wvx",
+          "wmx",
+          "wm",
+          "mpg",
+          "mp4",
+          "mkv",
+          "mpeg",
+          "mov",
+          "asf",
+          "m4v",
+          "m3u8",
+          "swf",
+        ].indexOf(name.substr(name.lastIndexOf(".") + 1)) !== -1
+      )
+        return {
+          title,
+          col_type: "avatar",
+          img:
+            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220111330.png",
+          url: `hiker://emptyy@lazyRule=.js:${loadCdn}${parseDomForHtml(
+            li,
+            "a&&href"
+          ).replace("javascript:", "KinhDownload.video_")};`,
+        };
+      else if (
+        [
+          "jpg",
+          "jpeg",
+          "gif",
+          "bmp",
+          "png",
+          "jpe",
+          "cur",
+          "svg",
+          "svgz",
+          "ico",
+          "webp",
+          "tif",
+          "tiff",
+        ].indexOf(name.substr(name.lastIndexOf(".") + 1)) !== -1
+      )
+        return {
+          title,
+          col_type: "avatar",
+          img:
+            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220112227.png",
+          url: `hiker://emptyy@lazyRule=.js:${loadCdn}${parseDomForHtml(
+            li,
+            "a&&href"
+          ).replace("javascript:", "KinhDownload.image_")};`,
+        };
+      else {
+        return {
+          title,
+          col_type: "avatar",
+          img:
+            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220112224.png",
+          url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
+            li,
+            "a&&href"
+          ).replace("javascript:", "KinhDownload.")};`,
+        };
+      }
+    });
   }
 }

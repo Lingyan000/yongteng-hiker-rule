@@ -3,7 +3,7 @@ import * as querystring from "querystring";
 import { hiker_setHomeResult } from "hiker-nice/lib/utils/hiker";
 import { HomeRuleItem } from "../../../utils/common";
 import { disclaimer, isAgree } from "./disclaimer";
-import filesList from "./filesPreview";
+import wholeList from "./whole";
 
 export function loadPage(url: string): void {
   let arg = parse(url).query;
@@ -17,7 +17,7 @@ export function loadPage(url: string): void {
   } = querystring.parse(arg!);
   let items: HomeRuleItem[] = [];
   if (isAgree()) {
-    items = filesList(params.url!, params.pwd);
+    items = wholeList(params.url!, params.pwd);
   } else {
     items = disclaimer();
   }
