@@ -44,7 +44,7 @@ export function video_dl(
   } catch (e) {
     return `toast://${e.message}`;
   }
-  if (isObject(res))
+  if (isObject(res.data))
     if (!!res.data.dlink && !!res.data.ua) {
       let dlinkRes: any = {};
       try {
@@ -132,7 +132,7 @@ export function image_dl(
   } catch (e) {
     return `toast://${e.message}`;
   }
-  if (isObject(res))
+  if (isObject(res.data))
     if (!!res.data.dlink && !!res.data.ua) {
       let dlinkRes: any = {};
       try {
@@ -214,7 +214,7 @@ export function dl(
   } catch (e) {
     setError(e.message);
   }
-  if (isObject(res))
+  if (isObject(res.data))
     if (!!res.data.dlink && !!res.data.ua) {
       setHomeResult({
         data: [
