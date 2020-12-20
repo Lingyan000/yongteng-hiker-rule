@@ -75,7 +75,7 @@ export class KinhDownload {
     pwd: string
   ) {
     try {
-      let res = $http.post(
+      return $http.post(
         "https://pan.kdbaidu.com/?download",
         qs.stringify(
           {
@@ -92,13 +92,15 @@ export class KinhDownload {
             encode: true,
           }
         ),
-        { redirect: false }
+        { redirect: true, timeout: 30000 }
       );
-      if (res.status === 200) {
-        return res;
-      } else {
-        return $http.get(res.headers.location[0]);
-      }
+      // if (res.status === 200) {
+      //   return res;
+      // } else {
+      //   return $http.get(res.headers.location[0],{
+      //     timeout: 20000
+      //   });
+      // }
     } catch (e) {
       if (e.message == "Request failed with status code -1")
         throw new Error("请求超时，可尝试重新获取");
