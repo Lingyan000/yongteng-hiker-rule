@@ -155,7 +155,7 @@ export class KinhDownload {
           title,
           col_type: "avatar",
           img:
-            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220111330.png",
+            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203232.png",
           url: `hiker://emptyy@lazyRule=.js:${loadCdn}${parseDomForHtml(
             li,
             "a&&href"
@@ -182,7 +182,7 @@ export class KinhDownload {
           title,
           col_type: "avatar",
           img:
-            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220112227.png",
+            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203238.png",
           url: `hiker://emptyy@lazyRule=.js:${loadCdn}${parseDomForHtml(
             li,
             "a&&href"
@@ -193,7 +193,7 @@ export class KinhDownload {
           title,
           col_type: "avatar",
           img:
-            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220112224.png",
+            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203228.png",
           url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
             li,
             "a&&href"

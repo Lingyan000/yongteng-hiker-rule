@@ -219,19 +219,47 @@ export function dl(
       setHomeResult({
         data: [
           {
-            title: "下载地址：",
+            title: `<strong>文件名：${res.data.server_filename}</strong>`,
+            col_type: "rich_text",
+          },
+          {
+            title: "",
+            col_type: "line_blank",
+          },
+          {
+            title: "<strong>下载地址：</strong>",
             col_type: "rich_text",
           },
           {
             title: `${res.data.dlink}`,
-            col_type: "rich_text",
+            col_type: "text_1",
+            desc: "长按复制下载地址",
+            url: "toast://长按复制",
           },
           {
-            title: "User-Agent：",
+            title: "",
+            col_type: "line_blank",
+          },
+          {
+            title: "<strong>User-Agent：</strong>",
             col_type: "rich_text",
           },
           {
             title: `${res.data.ua}`,
+            col_type: "text_1",
+            desc: "长按复制 User-Agent",
+            url: "toast://长按复制",
+          },
+          {
+            title: "",
+            col_type: "line_blank",
+          },
+          {
+            title: "<strong>支持 KinhDownload：</strong>",
+            col_type: "rich_text",
+          },
+          {
+            title: `现在云解析必须将文件转存到超级会员账号内才可进行下载每天只能转成5万个文件，希望大家可以对云解析进行提供，限速的账号也行！限速的账号也行！限速的账号也行！你无需购买，只要到哔喱哔喱，微博账号分享帖子，微信公众号账号分享帖子，这个工具即可将svip账号加入到云解析数据库中，集中的越多以后越稳定！<a href="https://ubaq.lanzous.com/iOR96jepmte">https://ubaq.lanzous.com/iOR96jepmte</a>`,
             col_type: "rich_text",
           },
         ] as HomeRuleItem[],
@@ -241,6 +269,7 @@ export function dl(
     let pArr = parseDomForArray(res.data, ".alert-primary&&p");
     let dlink: string = "";
     let ua: string = "";
+    let server_filename: string = "";
     pArr.forEach((p) => {
       if (p.indexOf("下载地址") !== -1) {
         dlink = parseDomForHtml(p, "b&&Text");
@@ -248,24 +277,55 @@ export function dl(
       if (p.indexOf("User-Agent") !== -1) {
         ua = parseDomForHtml(p, "b&&Text");
       }
+      if (p.indexOf("文件名") !== -1) {
+        server_filename = parseDomForHtml(p, "b&&Text");
+      }
     });
     if (dlink && ua) {
       setHomeResult({
         data: [
           {
-            title: "下载地址：",
+            title: `<strong>文件名：${server_filename}</strong>`,
+            col_type: "rich_text",
+          },
+          {
+            title: "",
+            col_type: "line_blank",
+          },
+          {
+            title: "<strong>下载地址：</strong>",
             col_type: "rich_text",
           },
           {
             title: `${dlink}`,
-            col_type: "rich_text",
+            col_type: "text_1",
+            desc: "长按复制下载地址",
+            url: "toast://长按复制",
           },
           {
-            title: "User-Agent：",
+            title: "",
+            col_type: "line_blank",
+          },
+          {
+            title: "<strong>User-Agent：</strong>",
             col_type: "rich_text",
           },
           {
             title: `${ua}`,
+            col_type: "text_1",
+            desc: "长按复制 User-Agent",
+            url: "toast://长按复制",
+          },
+          {
+            title: "",
+            col_type: "line_blank",
+          },
+          {
+            title: "<strong>支持 KinhDownload：</strong>",
+            col_type: "rich_text",
+          },
+          {
+            title: `现在云解析必须将文件转存到超级会员账号内才可进行下载每天只能转成5万个文件，希望大家可以对云解析进行提供，限速的账号也行！限速的账号也行！限速的账号也行！你无需购买，只要到哔喱哔喱，微博账号分享帖子，微信公众号账号分享帖子，这个工具即可将svip账号加入到云解析数据库中，集中的越多以后越稳定！<a href="https://ubaq.lanzous.com/iOR96jepmte">https://ubaq.lanzous.com/iOR96jepmte</a>`,
             col_type: "rich_text",
           },
         ] as HomeRuleItem[],
