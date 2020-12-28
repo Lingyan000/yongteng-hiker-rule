@@ -14,7 +14,7 @@ export class KinhDownload {
     this.pwd = pwd;
     if (this.validate(link))
       return $http.post(
-        "https://pan.kdbaidu.com/",
+        "http://111.229.144.179/KD[DP]Web/",
         qs.stringify({
           surl: this.surl,
           pwd: this.pwd,
@@ -50,7 +50,7 @@ export class KinhDownload {
     randsk: string
   ) {
     return $http.post(
-      "https://pan.kdbaidu.com/",
+      "http://111.229.144.179/KD[DP]Web/",
       qs.stringify(
         {
           dir: path,
@@ -76,7 +76,7 @@ export class KinhDownload {
   ) {
     try {
       return $http.post(
-        "https://pan.kdbaidu.com/?download",
+        "http://111.229.144.179/KD[DP]Web/?download",
         qs.stringify(
           {
             fs_id,
@@ -89,7 +89,7 @@ export class KinhDownload {
             pwd,
           },
           {
-            encode: true,
+            encode: false,
           }
         ),
         { redirect: true, timeout: 30000 }

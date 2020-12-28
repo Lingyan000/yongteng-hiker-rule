@@ -61,7 +61,9 @@ export function video_dl(
       }
       return (
         (dlinkRes.headers.location[0] &&
-          `${dlinkRes.headers.location[0]};{User-Agent@${res.data.ua.replace(
+          `${
+            dlinkRes.headers.location[0]
+          }&hiker_type=.mp4;{User-Agent@${res.data.ua.replace(
             /;/g,
             "%%"
           )}.js:input.replace(\/%%\/g,"；；")}`) ||
@@ -96,7 +98,9 @@ export function video_dl(
       }
       return (
         (dlinkRes.headers.location[0] &&
-          `${dlinkRes.headers.location[0]};{User-Agent@${ua.replace(
+          `${
+            dlinkRes.headers.location[0]
+          }&hiker_type=.mp4;{User-Agent@${ua.replace(
             /;/g,
             "%%"
           )}.js:input.replace(\/%%\/g,"；；")}`) ||
