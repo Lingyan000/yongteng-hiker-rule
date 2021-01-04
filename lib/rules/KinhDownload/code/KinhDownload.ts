@@ -159,7 +159,7 @@ export class KinhDownload {
           url: `hiker://emptyy@lazyRule=.js:${loadCdn}${parseDomForHtml(
             li,
             "a&&href"
-          ).replace("javascript:", "KinhDownload.video_")};`,
+          ).replace("javascript:", "KinhDownload.")};`,
         };
       else if (
         [
@@ -186,7 +186,7 @@ export class KinhDownload {
           url: `hiker://emptyy@lazyRule=.js:${loadCdn}${parseDomForHtml(
             li,
             "a&&href"
-          ).replace("javascript:", "KinhDownload.image_")};`,
+          ).replace("javascript:", "KinhDownload.")};`,
         };
       else {
         return {
