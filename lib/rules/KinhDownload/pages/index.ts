@@ -5,7 +5,7 @@ import { HomeRuleItem } from "../../../utils/common";
 import { disclaimer, isAgree } from "./disclaimer";
 import wholeList from "./whole";
 
-export function loadPage(url: string): void {
+export function loadPage(url: string, pass: string): void {
   let arg = parse(url).query;
   let params: {
     class?: string;
@@ -17,7 +17,7 @@ export function loadPage(url: string): void {
   } = querystring.parse(arg!);
   let items: HomeRuleItem[] = [];
   if (isAgree()) {
-    items = wholeList(params.url!, params.pwd);
+    items = wholeList(params.url!, params.pwd, pass);
   } else {
     items = disclaimer();
   }

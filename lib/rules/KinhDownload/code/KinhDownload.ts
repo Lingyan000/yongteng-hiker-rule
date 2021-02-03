@@ -10,16 +10,24 @@ export class KinhDownload {
   private pwd: string = "";
   private uk: string = "";
   private shareid: string = "";
-  post(link: string, pwd: string = "") {
+  private pass: string = "";
+  private baseUrl: string = "https://pan.kdbaidu.com";
+  post(
+    link: string,
+    pwd: string = "",
+    pass: string = ""
+  ) {
     this.pwd = pwd;
+    this.pass = pass;
     if (this.validate(link))
       return $http.post(
-        "http://111.229.144.179/KD[DP]Web/",
+        this.baseUrl,
         qs.stringify({
           surl: this.surl,
           pwd: this.pwd,
           uk: this.uk,
           shareid: this.shareid,
+          pass: this.pass,
         })
       );
     else throw new Error("分享链接填写有误，请检查");
@@ -47,10 +55,11 @@ export class KinhDownload {
     share_id: string,
     uk: string,
     surl: string,
-    randsk: string
+    randsk: string,
+    pass: string
   ) {
     return $http.post(
-      "http://111.229.144.179/KD[DP]Web/",
+      "",
       qs.stringify(
         {
           dir: path,
@@ -59,6 +68,7 @@ export class KinhDownload {
           share_id,
           uk,
           randsk: decodeURI(randsk),
+          pass,
         },
         { encode: false }
       )
@@ -66,27 +76,23 @@ export class KinhDownload {
   }
   dl(
     fs_id: string,
-    timestamp: string,
-    sign: string,
     randsk: string,
     share_id: string,
     uk: string,
-    share: string,
-    pwd: string
+    filesize: string,
+    pass: string
   ) {
     try {
       return $http.post(
-        "http://111.229.144.179/KD[DP]Web/?download",
+        `${this.baseUrl}?download`,
         qs.stringify(
           {
             fs_id,
-            timestamp,
-            sign,
             randsk: decodeURI(randsk),
             share_id,
             uk,
-            share,
-            pwd,
+            filesize,
+            pass,
           },
           {
             encode: false,
@@ -156,10 +162,10 @@ export class KinhDownload {
           col_type: "avatar",
           img:
             "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203232.png",
-          url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
+          url: `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
             li,
             "a&&href"
-          ).replace("javascript:", "KinhDownload.")};`,
+          ).replace("javascript:", "KinhDownload.video_")};`,
         };
       else if (
         [
@@ -183,10 +189,10 @@ export class KinhDownload {
           col_type: "avatar",
           img:
             "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203238.png",
-          url: `hiker://empty@rule=.js:${loadCdn}${parseDomForHtml(
+          url: `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
             li,
             "a&&href"
-          ).replace("javascript:", "KinhDownload.")};`,
+          ).replace("javascript:", "KinhDownload.image_")};`,
         };
       else {
         return {
