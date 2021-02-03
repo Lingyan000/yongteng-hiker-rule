@@ -11,7 +11,7 @@ export class KinhDownload {
   private uk: string = "";
   private shareid: string = "";
   private pass: string = "";
-  private baseUrl: string = "https://pan.kdbaidu.com";
+  private baseUrl: string = "http://111.229.144.179/KinhDown[DP]Web/";
   post(
     link: string,
     pwd: string = "",

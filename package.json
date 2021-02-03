@@ -1,6 +1,6 @@
 {
   "name": "yongteng-hiker-rule",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "yongteng 的海阔视界规则调用库",
   "main": "index.ts",
   "scripts": {
