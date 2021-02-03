@@ -11,14 +11,16 @@ export class KinhDownload {
   private uk: string = "";
   private shareid: string = "";
   private pass: string = "";
-  private baseUrl: string = "http://111.229.144.179/KinhDown[DP]Web/";
+  private baseUrl: string = "";
   post(
     link: string,
     pwd: string = "",
-    pass: string = ""
+    pass: string = "",
+    baseUrl: string = "http://111.229.144.179/KinhDown[DP]Web/"
   ) {
     this.pwd = pwd;
     this.pass = pass;
+    this.baseUrl = baseUrl;
     if (this.validate(link))
       return $http.post(
         this.baseUrl,
@@ -59,7 +61,7 @@ export class KinhDownload {
     pass: string
   ) {
     return $http.post(
-      "",
+      this.baseUrl,
       qs.stringify(
         {
           dir: path,

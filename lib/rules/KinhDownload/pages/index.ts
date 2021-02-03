@@ -5,7 +5,11 @@ import { HomeRuleItem } from "../../../utils/common";
 import { disclaimer, isAgree } from "./disclaimer";
 import wholeList from "./whole";
 
-export function loadPage(url: string, pass: string): void {
+export function loadPage(
+  url: string,
+  pass: string,
+  baseUrl: string = "http://111.229.144.179/KinhDown[DP]Web/"
+): void {
   let arg = parse(url).query;
   let params: {
     class?: string;
@@ -17,7 +21,7 @@ export function loadPage(url: string, pass: string): void {
   } = querystring.parse(arg!);
   let items: HomeRuleItem[] = [];
   if (isAgree()) {
-    items = wholeList(params.url!, params.pwd, pass);
+    items = wholeList(params.url!, params.pwd, pass, baseUrl);
   } else {
     items = disclaimer();
   }
