@@ -115,98 +115,123 @@ export class KinhDownload {
   }
   parsingList(data: string): HomeRuleItem[] {
     let list: string[] = parseDomForArray(data, ".list-group&&li");
-    return list.map((li) => {
-      let name = parseDomForHtml(li, "a&&Text");
-      let size = parseDomForHtml(li, ".float-right&&Text");
-      let title = `${name}${size && " --" + size}`;
-      if (parseDomForArray(li, ".fa-folder").length > 0)
-        return {
-          title,
-          col_type: "avatar",
-          img:
-            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220105956.png",
-          url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
-            li,
-            "a&&href"
-          ).replace("javascript:", "KinhDownload.")};`,
-        };
-      else if (
-        [
-          "wmv",
-          "rmvb",
-          "mpeg4",
-          "mpeg2",
-          "flv",
-          "avi",
-          "3gp",
-          "mpga",
-          "qt",
-          "rm",
-          "wmz",
-          "wmd",
-          "wvx",
-          "wmx",
-          "wm",
-          "mpg",
-          "mp4",
-          "mkv",
-          "mpeg",
-          "mov",
-          "asf",
-          "m4v",
-          "m3u8",
-          "swf",
-        ].indexOf(name.substr(name.lastIndexOf(".") + 1)) !== -1
-      )
-        return {
-          title,
-          col_type: "avatar",
-          img:
-            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203232.png",
-          url: `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
-            li,
-            "a&&href"
-          ).replace("javascript:", "KinhDownload.video_")};`,
-        };
-      else if (
-        [
-          "jpg",
-          "jpeg",
-          "gif",
-          "bmp",
-          "png",
-          "jpe",
-          "cur",
-          "svg",
-          "svgz",
-          "ico",
-          "webp",
-          "tif",
-          "tiff",
-        ].indexOf(name.substr(name.lastIndexOf(".") + 1)) !== -1
-      )
-        return {
-          title,
-          col_type: "avatar",
-          img:
-            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203238.png",
-          url: `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
-            li,
-            "a&&href"
-          ).replace("javascript:", "KinhDownload.image_")};`,
-        };
-      else {
-        return {
-          title,
-          col_type: "avatar",
-          img:
-            "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203228.png",
-          url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
-            li,
-            "a&&href"
-          ).replace("javascript:", "KinhDownload.")};`,
-        };
-      }
-    });
+    const mode = getVar("KD_Multilayer", "Part");
+    return [
+      {
+        title: `${(mode === "All" && "☑") || ""}全部二级`,
+        url: `hiker://empty@lazyRule=.js:putVar("KD_Multilayer","All");refreshPage();"toast://全部二级模式"`,
+        col_type: "text_2",
+      },
+      {
+        title: `${(mode === "Part" && "☑") || ""}部分二级`,
+        url: `hiker://empty@lazyRule=.js:putVar("KD_Multilayer","Part");refreshPage();"toast://部分二级模式"`,
+        col_type: "text_2",
+      },
+      ...list.map((li) => {
+        let name = parseDomForHtml(li, "a&&Text");
+        let size = parseDomForHtml(li, ".float-right&&Text");
+        let title = `${name}${size && " --" + size}`;
+        if (parseDomForArray(li, ".fa-folder").length > 0)
+          return {
+            title,
+            col_type: "avatar",
+            img:
+              "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220105956.png",
+            url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
+              li,
+              "a&&href"
+            ).replace("javascript:", "KinhDownload.")};`,
+          };
+        else if (
+          [
+            "wmv",
+            "rmvb",
+            "mpeg4",
+            "mpeg2",
+            "flv",
+            "avi",
+            "3gp",
+            "mpga",
+            "qt",
+            "rm",
+            "wmz",
+            "wmd",
+            "wvx",
+            "wmx",
+            "wm",
+            "mpg",
+            "mp4",
+            "mkv",
+            "mpeg",
+            "mov",
+            "asf",
+            "m4v",
+            "m3u8",
+            "swf",
+          ].indexOf(name.substr(name.lastIndexOf(".") + 1)) !== -1
+        )
+          return {
+            title,
+            col_type: "avatar",
+            img:
+              "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203232.png",
+            url:
+              mode === "Part"
+                ? `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
+                    li,
+                    "a&&href"
+                  ).replace("javascript:", "KinhDownload.video_")};`
+                : `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
+                    li,
+                    "a&&href"
+                  ).replace("javascript:", "KinhDownload.")};`,
+          };
+        else if (
+          [
+            "jpg",
+            "jpeg",
+            "gif",
+            "bmp",
+            "png",
+            "jpe",
+            "cur",
+            "svg",
+            "svgz",
+            "ico",
+            "webp",
+            "tif",
+            "tiff",
+          ].indexOf(name.substr(name.lastIndexOf(".") + 1)) !== -1
+        )
+          return {
+            title,
+            col_type: "avatar",
+            img:
+              "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203238.png",
+            url:
+              mode === "Part"
+                ? `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
+                    li,
+                    "a&&href"
+                  ).replace("javascript:", "KinhDownload.image_")};`
+                : `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
+                    li,
+                    "a&&href"
+                  ).replace("javascript:", "KinhDownload.")};`,
+          };
+        else {
+          return {
+            title,
+            col_type: "avatar",
+            img:
+              "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203228.png",
+            url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
+              li,
+              "a&&href"
+            ).replace("javascript:", "KinhDownload.")};`,
+          };
+        }
+      }),
+    ];
   }
 }
