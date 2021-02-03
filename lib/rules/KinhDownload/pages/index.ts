@@ -5,10 +5,13 @@ import { HomeRuleItem } from "../../../utils/common";
 import { disclaimer, isAgree } from "./disclaimer";
 import wholeList from "./whole";
 
+declare function putVar(key: string, value: any): void;
+declare function getVar(key: string, value?: any): any;
+
 export function loadPage(
   url: string,
   pass: string,
-  baseUrl: string = "http://111.229.144.179/KinhDown[DP]Web/"
+  baseUrl: string = "http://pan.kdbaidu.com"
 ): void {
   let arg = parse(url).query;
   let params: {
@@ -20,8 +23,9 @@ export function loadPage(
     [propName: string]: any;
   } = querystring.parse(arg!);
   let items: HomeRuleItem[] = [];
+  putVar("kinhDownload_baseUrl", baseUrl);
   if (isAgree()) {
-    items = wholeList(params.url!, params.pwd, pass, baseUrl);
+    items = wholeList(params.url!, params.pwd, pass);
   } else {
     items = disclaimer();
   }

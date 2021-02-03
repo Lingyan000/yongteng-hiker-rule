@@ -4,6 +4,8 @@ import { HomeRuleItem } from "../../../utils/common";
 import { loadCdn } from "../utils/common";
 declare function parseDomForHtml(html: string, choose: string): string;
 declare function parseDomForArray(html: string, choose: string): string[];
+declare function putVar(key: string, value: any): void;
+declare function getVar(key: string, value?: any): any;
 
 export class KinhDownload {
   private surl: string = "";
@@ -11,16 +13,13 @@ export class KinhDownload {
   private uk: string = "";
   private shareid: string = "";
   private pass: string = "";
-  private baseUrl: string = "";
-  post(
-    link: string,
-    pwd: string = "",
-    pass: string = "",
-    baseUrl: string = "http://111.229.144.179/KinhDown[DP]Web/"
-  ) {
+  private baseUrl: string = "http://pan.kdbaidu.com";
+  constructor() {
+    this.baseUrl = getVar("kinhDownload_baseUrl", "http://pan.kdbaidu.com");
+  }
+  post(link: string, pwd: string = "", pass: string = "") {
     this.pwd = pwd;
     this.pass = pass;
-    this.baseUrl = baseUrl;
     if (this.validate(link))
       return $http.post(
         this.baseUrl,
