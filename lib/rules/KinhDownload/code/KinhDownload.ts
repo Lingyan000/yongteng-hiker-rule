@@ -17,9 +17,18 @@ export class KinhDownload {
   constructor() {
     this.baseUrl = getVar("kinhDownload_baseUrl", "http://pan.kdbaidu.com");
   }
+
+  getPass() {
+    let res = $http.get(this.baseUrl);
+    let html = res.data;
+    let pass = parseDomForHtml(html, "input[name=pass]&&value");
+    return pass;
+  }
+
   post(link: string, pwd: string = "", pass: string = "") {
     this.pwd = pwd;
-    this.pass = pass;
+    if (pass === "") this.pass = this.getPass();
+    else this.pass = pass;
     if (this.validate(link))
       return $http.post(
         this.baseUrl,
