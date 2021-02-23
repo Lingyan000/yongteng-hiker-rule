@@ -99,7 +99,7 @@ export function video_dl(
       // );
       return (
         (dlink &&
-          `${dlink}&hiker_type=.mp4;{User-Agent@${ua.replace(
+          `${dlink}#isVideo=true#;{User-Agent@${ua.replace(
             /;/g,
             "%%"
           )}.js:input.replace(\/%%\/g,"；；")}`) ||
