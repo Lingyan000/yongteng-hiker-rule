@@ -138,9 +138,12 @@ export class KinhDownload {
       },
       ...list.map((li) => {
         let name = parseDomForHtml(li, "a&&Text");
-        let size = parseDomForHtml(li, ".float-right&&span&&Text")
-          .replace("aria2", "")
-          .replace("idm", "");
+        let size = "";
+        try {
+          size = parseDomForHtml(li, ".btn,0&&Text");
+        } catch (error) {
+          size = "";
+        }
         let title = `${name}${size && " --" + size}`;
         if (parseDomForArray(li, ".fa-folder").length > 0)
           return {
@@ -190,11 +193,11 @@ export class KinhDownload {
               mode === "Part"
                 ? `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
                     li,
-                    ".list-btn&&.btn&&href"
+                    ".btn,1&&href"
                   ).replace("javascript:", "KinhDownload.video_")};`
                 : `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
                     li,
-                    ".list-btn&&.btn&&href"
+                    ".btn,1&&href"
                   ).replace("javascript:", "KinhDownload.")};`,
           };
         else if (
@@ -223,11 +226,11 @@ export class KinhDownload {
               mode === "Part"
                 ? `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
                     li,
-                    ".list-btn&&.btn&&href"
+                    ".btn,1&&href"
                   ).replace("javascript:", "KinhDownload.image_")};`
                 : `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
                     li,
-                    ".list-btn&&.btn&&href"
+                    ".btn,1&&href"
                   ).replace("javascript:", "KinhDownload.")};`,
           };
         else {
@@ -238,7 +241,7 @@ export class KinhDownload {
               "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203228.png",
             url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
               li,
-              ".list-btn&&.btn&&href"
+              ".btn,1&&href"
             ).replace("javascript:", "KinhDownload.")};`,
           };
         }
