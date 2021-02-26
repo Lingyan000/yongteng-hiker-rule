@@ -94,7 +94,7 @@ export class KinhDownload {
   ) {
     try {
       return $http.post(
-        `${this.baseUrl}?download`,
+        `${this.baseUrl}?download_aria2`,
         qs.stringify(
           {
             fs_id,
@@ -127,18 +127,20 @@ export class KinhDownload {
     const mode = getVar("KD_Multilayer", "Part");
     return [
       {
-        title: `${(mode === "All" && "☑") || ""}全部二级`,
+        title: `${(mode === "All" && "☑ ") || "☐ "}全部二级`,
         url: `hiker://empty@lazyRule=.js:putVar("KD_Multilayer","All");refreshPage();"toast://全部二级模式"`,
         col_type: "text_2",
       },
       {
-        title: `${(mode === "Part" && "☑") || ""}部分二级`,
+        title: `${(mode === "Part" && "☑ ") || "☐ "}部分二级`,
         url: `hiker://empty@lazyRule=.js:putVar("KD_Multilayer","Part");refreshPage();"toast://部分二级模式"`,
         col_type: "text_2",
       },
       ...list.map((li) => {
         let name = parseDomForHtml(li, "a&&Text");
-        let size = parseDomForHtml(li, ".float-right&&Text");
+        let size = parseDomForHtml(li, ".float-right&&span&&Text")
+          .replace("aria2", "")
+          .replace("idm", "");
         let title = `${name}${size && " --" + size}`;
         if (parseDomForArray(li, ".fa-folder").length > 0)
           return {
@@ -188,11 +190,11 @@ export class KinhDownload {
               mode === "Part"
                 ? `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
                     li,
-                    "a&&href"
+                    ".list-btn&&.btn&&href"
                   ).replace("javascript:", "KinhDownload.video_")};`
                 : `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
                     li,
-                    "a&&href"
+                    ".list-btn&&.btn&&href"
                   ).replace("javascript:", "KinhDownload.")};`,
           };
         else if (
@@ -221,11 +223,11 @@ export class KinhDownload {
               mode === "Part"
                 ? `hiker://empty@lazyRule=.js:${loadCdn}${parseDomForHtml(
                     li,
-                    "a&&href"
+                    ".list-btn&&.btn&&href"
                   ).replace("javascript:", "KinhDownload.image_")};`
                 : `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
                     li,
-                    "a&&href"
+                    ".list-btn&&.btn&&href"
                   ).replace("javascript:", "KinhDownload.")};`,
           };
         else {
@@ -236,7 +238,7 @@ export class KinhDownload {
               "https://cdn.jsdelivr.net/gh/Lingyan000/pic@master/img/20201220203228.png",
             url: `hiker://empty@rule=js:${loadCdn}${parseDomForHtml(
               li,
-              "a&&href"
+              ".list-btn&&.btn&&href"
             ).replace("javascript:", "KinhDownload.")};`,
           };
         }
